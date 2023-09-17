@@ -17,9 +17,10 @@ class Contact(Base):
     phone_number = Column(String, unique=True, index=True)
     birth_date = Column(Date)
     additional_info = Column(String, nullable=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey("users.id"))
 
     user = relationship("User", back_populates="contacts")
+
 
 class User(Base):
     __tablename__ = "users"
@@ -28,7 +29,8 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     contacts = relationship("Contact", back_populates="user")
-    
+
+
 class UserCreate(BaseModel):
     username: str
     password: str
